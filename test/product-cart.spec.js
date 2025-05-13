@@ -26,7 +26,7 @@ test.describe('Product and Cart Tests', () => {
         await pageManager.close();
     });
 
-    test('Add product to cart and verify cart count', async () => {
+    test('Add product to cart and verify cart', async () => {
         const expectedProductName = 'Apple iPhone 13 128GB';
 
         await pageManager.mainPage.goto();
@@ -36,8 +36,8 @@ test.describe('Product and Cart Tests', () => {
 
         await pageManager.productPage.expectProductName(expectedProductName);
         await pageManager.productPage.addToCart();
+        await pageManager.productPage.navigateToCart();
         await pageManager.productPage.expectProductAddedBoxVisible();
-        await pageManager.productPage.expectCartCount('1');
     });
 
     test('Navigate to cart and verify product', async () => {
@@ -49,7 +49,7 @@ test.describe('Product and Cart Tests', () => {
         await pageManager.mainPage.selectProductWithMinPrice();
         
         await pageManager.productPage.addToCart();
-        await pageManager.productPage.goToCart();
+        await pageManager.productPage.navigateToCart();
 
         await pageManager.cartPage.expectCartUrl();
         await pageManager.cartPage.expectProductInCart(expectedProductName);

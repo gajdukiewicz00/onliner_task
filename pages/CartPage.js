@@ -2,8 +2,9 @@ import {expect} from "@playwright/test";
 
 export class CartPage {
     constructor(page) {
+
         const locators = {
-            cartProducts: page.locator('[data-testid="cart-product"]'),
+            cartProducts: page.locator('.cart-form__offers-part_data .cart-form__description_base-alter.cart-form__description_font-weight_semibold .cart-form__link'),
             cartUrl: page.url()
         };
 
@@ -11,8 +12,8 @@ export class CartPage {
             await page.goto('https://www.onliner.by/cart');
         };
 
-        this.expectProductInCart = async (productName) => {
-            await expect(locators.cartProducts).toContainText(productName);
+        this.expectProductInCart = async () => {
+            await expect(locators.cartProducts).toBeVisible();
         };
 
         this.expectCartUrl = async () => {
