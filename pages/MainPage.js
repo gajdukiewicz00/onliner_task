@@ -11,6 +11,9 @@ export class MainPage {
             productLink: () => locators.searchFrame.locator('.product__title a')
         };
 
+        this.page = page;
+        this.locators = locators;
+
         this.goto = async () => {
             await page.goto('https://www.onliner.by/');
         };
@@ -49,6 +52,11 @@ export class MainPage {
                 state: 'visible',
                 timeout: 10000
             });
+        };
+
+        this.expectPageLoaded = async () => {
+            await expect(page).toHaveURL('https://www.onliner.by/');
+            await expect(locators.searchInput).toBeVisible();
         };
     }
 }
